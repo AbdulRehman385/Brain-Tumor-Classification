@@ -11,8 +11,6 @@ import streamlit as st
 from tensorflow.keras.models import load_model
 from PIL import Image
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Load CNN model
 model = load_model("model_cnn.h5")
