@@ -57,8 +57,8 @@ def process_and_predict(file):
     else:
         prediction = 'Glioma'
 
-    print(f"Type of tumor: {prediction}")
-    return im.resize((300,300), Image.LANCZOS)
+    # print(f"Type of tumor: {prediction}")
+    return prediction ,im.resize((300,300), Image.LANCZOS)
 
 # Title
 st.title('Brain Tumor Classification App')
@@ -70,7 +70,8 @@ uploaded_file = st.file_uploader('Choose an image...', type=["jpg", "jpeg", "png
 
 if st.button('Predict'):
   if uploaded_file is not None:
-    process_and_predict(uploaded_file)
+    pred, img = process_and_predict(uploaded_file)
+    st.write(f"Type of tumor: {pred}")
     st.image(process_and_predict(uploaded_file))
 
   else:
