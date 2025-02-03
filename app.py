@@ -72,7 +72,7 @@ if st.button('Predict'):
   if uploaded_file is not None:
     pred, img = process_and_predict(uploaded_file)
     st.write(f"Type of tumor: {pred}")
-    st.image(process_and_predict(uploaded_file))
+    st.image(img)
 
   else:
     print('Error: Upload Image file, type=["jpg", "jpeg", "png", "gif"]')
