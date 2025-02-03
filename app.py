@@ -17,7 +17,7 @@ model = load_model("model_cnn.h5")
 
 # Predict Model
 def process_and_predict(file):
-    im = Image.open(file)
+    im = Image.open(file).convert("RGB")
     width, height = im.size
     if width == height:
         im = im.resize((200,200), Image.LANCZOS)
@@ -47,15 +47,10 @@ def process_and_predict(file):
     # Get the index of the highest probability
     pred_class = np.argmax(pred, axis=-1)  # This returns the index of the highest probability
 
-    # Map the predicted class to its label
-    if pred_class == 0:
-        prediction = 'Healthy (No Tumor)'
-    elif pred_class == 1:
-        prediction = 'Pituitary'
-    elif pred_class == 2:
-        prediction = 'Meningiona'
-    else:
-        prediction = 'Glioma'
+    class_index = pred_class[0]
+    
+    class_labels = ['Healthy (No Tumor)', 'Pituitary', 'Meningioma', 'Glioma']
+    prediction = class_labels[class_index]
 
     # print(f"Type of tumor: {prediction}")
     return prediction ,im.resize((300,300), Image.LANCZOS)
