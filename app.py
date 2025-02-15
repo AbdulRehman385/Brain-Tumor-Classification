@@ -11,9 +11,22 @@ import streamlit as st
 from tensorflow.keras.models import load_model
 from PIL import Image
 import numpy as np
+import gdown
+import os
+import tensorflow as tf
 
-# Load CNN model
-model = load_model("model_cnn.h5")
+# Define model path
+model_path = "Efficient_net_model.h5"
+
+# Check if model exists, otherwise download
+if not os.path.exists(model_path):
+    file_id = "1gMiynI4QPMicMSLExdGCfI1M-oUlCr3D"  # Replace with your actual File ID
+    url = f"https://drive.google.com/uc?id={file_id}"
+    
+    gdown.download(url, model_path, quiet=False)
+
+# Load the model
+model = tf.keras.models.load_model(model_path)
 
 # Predict Model
 # def process_and_predict(file):
