@@ -18,15 +18,26 @@ import tensorflow as tf
 # Define model path
 model_path = "Efficient_net_model.h5"
 
-# Check if model exists, otherwise download
+# Check if the model exists, otherwise download
 if not os.path.exists(model_path):
-    file_id = "1gMiynI4QPMicMSLExdGCfI1M-oUlCr3D"  # Replace with your actual File ID
+    file_id = "1gMiynI4QPMicMSLExdGCfI1M-oUlCr3D"  # Your actual File ID
     url = f"https://drive.google.com/uc?id={file_id}"
-    
+
+    print("Downloading model...")
     gdown.download(url, model_path, quiet=False)
 
-# Load the model
-model = tf.keras.models.load_model(model_path)
+# **Check if the file exists after download**
+if os.path.exists(model_path):
+    print("✅ Model downloaded successfully!")
+else:
+    print("❌ ERROR: Model file not found!")
+
+# Load the model if available
+try:
+    model = tf.keras.models.load_model(model_path)
+    print("✅ Model loaded successfully!")
+except Exception as e:
+    print(f"❌ ERROR loading model: {e}")
 
 # Predict Model
 # def process_and_predict(file):
